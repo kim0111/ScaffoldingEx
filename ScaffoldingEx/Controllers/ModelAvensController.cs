@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -122,6 +122,54 @@ namespace ScaffoldingEx.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult SearchHero()
+        {
+            return View();
+        }
+
+        public ActionResult SearchItem()
+        {
+            return PartialView();
+        }
+
+        [HttpPost]
+        public ActionResult Results(string FName)
+        {
+            var serch = db.modelAvens.Where(x => x.Name.Contains(FName)).ToList();
+
+            return PartialView(serch);
+
+        }
+
+        [HttpPost]
+        public ActionResult LinkResults()
+        {
+            var serch = db.modelAvens.Where(x => x.HeroName == "Hulk").First();
+
+            return PartialView(serch);
+
+        }
+
+        public JsonResult SendAsJson(string heroName)
+        {
+            var info = db.modelAvens.Where(x => x.HeroName.Contains(heroName)).ToList();
+
+            return Json(info,JsonRequestBehavior.AllowGet);
+        }
+
+        public string Context()
+        {
+            HttpContext.Response.Write("<h1>HELLO IT STEP</h1>");
+            string browser = HttpContext.Request.Browser.Browser;
+            string ip = HttpContext.Request.UserHostAddress;
+
+            HttpContext.Request.Cookies["Name"].Value = "Yura";
+
+            string cookies = HttpContext.Request.Cookies["Name"].Value;
+
+            return "<p> Browser: " + browser + "<br> IP:" + ip + "Cookie:" + cookies + "</p>";
         }
     }
 }

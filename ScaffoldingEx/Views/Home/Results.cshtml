@@ -1,0 +1,15 @@
+﻿@model IEnumerable<ScaffoldingEx.Models.ModelAven>
+
+
+<div id="showResults">
+	<h4>Данные Героя</h4>
+
+	@foreach (var Heros in Model)
+	{
+		<ul>
+			<li>@Heros.Name</li>
+			<li>@Heros.HeroName</li>
+			<li>@Heros.Age</li>
+		</ul>
+	}
+</div>

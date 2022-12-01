@@ -171,5 +171,26 @@ namespace ScaffoldingEx.Controllers
 
             return "<p> Browser: " + browser + "<br> IP:" + ip + "Cookie:" + cookies + "</p>";
         }
+
+        [ActionName("Time")]
+        public string VyvodVremeni()
+        {
+            return TimeStamp();
+        }
+
+        [NonAction]
+        public string TimeStamp()
+        {
+            return "Время :" + DateTime.Now.ToString();
+        }
+        public ActionResult ViewBootstrap()
+        {
+            return View();
+        }
+
+        public ActionResult LoginPage()
+        {
+            return View();
+        }
     }
 }
